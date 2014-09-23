@@ -21,6 +21,8 @@ def scrape():
     #creates a list from the large plaintext grab, making new list entries for each newline in the page
     fortune_list = random_50_fortunes.split('\n\n')
 
+    print fortune_list
+
     #one way to traverse a list looking for content - enumerate is used to capture the size of the list in this case
     for i, j in enumerate(fortune_list):
         #looking for the start of the actual fortunes on the page
