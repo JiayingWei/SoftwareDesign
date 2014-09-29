@@ -1,3 +1,5 @@
+#plays the wikipedia philosophy game - clicks the first link on every page until it reaches philosophy. This program does cheat in the sense that it will click the first unvisited link rather than the first link, to prevent you from being stuck in an infinent loop.
+
 from bs4 import BeautifulSoup as BS
 
 def local_links(article, prev_articles):    #finds the first valid unvisited article link for a given wikipedia page
@@ -25,7 +27,7 @@ def local_links(article, prev_articles):    #finds the first valid unvisited art
                 links[linknumber] = links[linknumber][startlink:endlink]
                 if 'disambiguation' not in links[linknumber] and '#' not in links[linknumber] and 'File:' not in links[linknumber] and 'Wikipedia:' not in links[linknumber] and  'Help:' not in links[linknumber] and '.ogg' not in links[linknumber]:     #filters out a bunch of stuff that aren't article links
                     links[linknumber] =  links[linknumber].replace('_',' ')
-                    if links[linknumber] != prev_articles:  #checks if the link has been visited before
+                    if links[linknumber] != prev_articles and links[linknumber] not in prev_articles:  #checks if the link has been visited before
                         return links[linknumber]
 
 def philosophy_game(origin):    #runs the local_links loop to click on the first link on every new article page until it reaches the philosophy page
